@@ -1,0 +1,482 @@
+name: weather_app
+description: A new Flutter project.
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.3 <4.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  google_fonts: ^5.0.0
+  flutter_svg: ^2.0.6
+  flutter_riverpod: ^2.3.6
+  file: ^6.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
+
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/AirQualityCompass.svg
+    - assets/images/Arrow.svg
+    - assets/images/Clouds.svg
+    - assets/images/CloudyNight.svg
+    - assets/images/CompassAir.svg
+    - assets/images/Haze.svg
+    - assets/images/NightClear.svg
+    - assets/images/NightOvercast.svg
+    - assets/images/Overcast.svg
+    - assets/images/Rainy.svg
+    - assets/images/Snow.svg
+    - assets/images/Sunny.svg
+    - assets/images/Thunderstorm.svg
+
+    - assets/AirQuality/1.svg
+    - assets/AirQuality/2.svg
+    - assets/AirQuality/3.svg
+    - assets/AirQuality/4.svg
+    - assets/AirQuality/5.svg
+    - assets/AirQuality/6.svg
+    - assets/AirQuality/7.svg
+    - assets/AirQuality/8.svg
+    - assets/AirQuality/9.svg
+    - assets/AirQuality/10.svg
+    
+    - assets/Windcompass/0.svg
+    - assets/Windcompass/1.svg
+    - assets/Windcompass/2.svg
+    - assets/Windcompass/3.svg
+    - assets/Windcompass/4.svg
+    - assets/Windcompass/5.svg
+    - assets/Windcompass/6.svg
+    - assets/Windcompass/7.svg
+    - assets/Windcompass/8.svg
+    - assets/Windcompass/9.svg
+    - assets/Windcompass/10.svg
+    - assets/Windcompass/11.svg
+    - assets/Windcompass/12.svg
+    - assets/Windcompass/13.svg
+    - assets/Windcompass/14.svg
+    - assets/Windcompass/15.svg
+    - assets/Windcompass/16.svg
+    - assets/Windcompass/17.svg
+    - assets/Windcompass/18.svg
+    - assets/Windcompass/19.svg
+    - assets/Windcompass/20.svg
+    - assets/Windcompass/21.svg
+    - assets/Windcompass/22.svg
+    - assets/Windcompass/23.svg
+    - assets/Windcompass/24.svg
+    - assets/Windcompass/25.svg
+    - assets/Windcompass/26.svg
+    - assets/Windcompass/27.svg
+    - assets/Windcompass/28.svg
+    - assets/Windcompass/29.svg
+    - assets/Windcompass/30.svg
+    - assets/Windcompass/31.svg
+    - assets/Windcompass/32.svg
+    - assets/Windcompass/33.svg
+    - assets/Windcompass/34.svg
+    - assets/Windcompass/35.svg
+    - assets/Windcompass/36.svg
+    - assets/Windcompass/37.svg
+    - assets/Windcompass/38.svg
+    - assets/Windcompass/39.svg
+    - assets/Windcompass/40.svg
+    - assets/Windcompass/41.svg
+    - assets/Windcompass/42.svg
+    - assets/Windcompass/43.svg
+    - assets/Windcompass/44.svg
+    - assets/Windcompass/45.svg
+    - assets/Windcompass/46.svg
+    - assets/Windcompass/47.svg
+    - assets/Windcompass/48.svg
+    - assets/Windcompass/49.svg
+    - assets/Windcompass/50.svg
+    - assets/Windcompass/51.svg
+    - assets/Windcompass/52.svg
+    - assets/Windcompass/53.svg
+    - assets/Windcompass/54.svg
+    - assets/Windcompass/55.svg
+    - assets/Windcompass/56.svg
+    - assets/Windcompass/57.svg
+    - assets/Windcompass/58.svg
+    - assets/Windcompass/59.svg
+    - assets/Windcompass/60.svg
+    - assets/Windcompass/61.svg
+    - assets/Windcompass/62.svg
+    - assets/Windcompass/63.svg
+    - assets/Windcompass/64.svg
+    - assets/Windcompass/65.svg
+    - assets/Windcompass/66.svg
+    - assets/Windcompass/67.svg
+    - assets/Windcompass/68.svg
+    - assets/Windcompass/69.svg
+    - assets/Windcompass/70.svg
+    - assets/Windcompass/71.svg
+    - assets/Windcompass/72.svg
+    - assets/Windcompass/73.svg
+    - assets/Windcompass/74.svg
+    - assets/Windcompass/75.svg
+    - assets/Windcompass/76.svg
+    - assets/Windcompass/77.svg
+    - assets/Windcompass/78.svg
+    - assets/Windcompass/79.svg
+    - assets/Windcompass/80.svg
+    - assets/Windcompass/81.svg
+    - assets/Windcompass/82.svg
+    - assets/Windcompass/83.svg
+    - assets/Windcompass/84.svg
+    - assets/Windcompass/85.svg
+    - assets/Windcompass/86.svg
+    - assets/Windcompass/87.svg
+    - assets/Windcompass/88.svg
+    - assets/Windcompass/89.svg
+    - assets/Windcompass/90.svg
+    - assets/Windcompass/91.svg
+    - assets/Windcompass/92.svg
+    - assets/Windcompass/93.svg
+    - assets/Windcompass/94.svg
+    - assets/Windcompass/95.svg
+    - assets/Windcompass/96.svg
+    - assets/Windcompass/97.svg
+    - assets/Windcompass/98.svg
+    - assets/Windcompass/99.svg
+    - assets/Windcompass/100.svg
+    - assets/Windcompass/101.svg
+    - assets/Windcompass/102.svg
+    - assets/Windcompass/103.svg
+    - assets/Windcompass/104.svg
+    - assets/Windcompass/105.svg
+    - assets/Windcompass/106.svg
+    - assets/Windcompass/107.svg
+    - assets/Windcompass/108.svg
+    - assets/Windcompass/109.svg
+    - assets/Windcompass/110.svg
+    - assets/Windcompass/111.svg
+    - assets/Windcompass/112.svg
+    - assets/Windcompass/113.svg
+    - assets/Windcompass/114.svg
+    - assets/Windcompass/115.svg
+    - assets/Windcompass/116.svg
+    - assets/Windcompass/117.svg
+    - assets/Windcompass/118.svg
+    - assets/Windcompass/119.svg
+    - assets/Windcompass/120.svg
+    - assets/Windcompass/121.svg
+    - assets/Windcompass/122.svg
+    - assets/Windcompass/123.svg
+    - assets/Windcompass/124.svg
+    - assets/Windcompass/125.svg
+    - assets/Windcompass/126.svg
+    - assets/Windcompass/127.svg
+    - assets/Windcompass/128.svg
+    - assets/Windcompass/129.svg
+    - assets/Windcompass/130.svg
+    - assets/Windcompass/131.svg
+    - assets/Windcompass/132.svg
+    - assets/Windcompass/133.svg
+    - assets/Windcompass/134.svg
+    - assets/Windcompass/135.svg
+    - assets/Windcompass/136.svg
+    - assets/Windcompass/137.svg
+    - assets/Windcompass/138.svg
+    - assets/Windcompass/139.svg
+    - assets/Windcompass/140.svg
+    - assets/Windcompass/141.svg
+    - assets/Windcompass/142.svg
+    - assets/Windcompass/143.svg
+    - assets/Windcompass/144.svg
+    - assets/Windcompass/145.svg
+    - assets/Windcompass/146.svg
+    - assets/Windcompass/147.svg
+    - assets/Windcompass/148.svg
+    - assets/Windcompass/149.svg
+    - assets/Windcompass/150.svg
+    - assets/Windcompass/151.svg
+    - assets/Windcompass/152.svg
+    - assets/Windcompass/153.svg
+    - assets/Windcompass/154.svg
+    - assets/Windcompass/155.svg
+    - assets/Windcompass/156.svg
+    - assets/Windcompass/157.svg
+    - assets/Windcompass/158.svg
+    - assets/Windcompass/159.svg
+    - assets/Windcompass/160.svg
+    - assets/Windcompass/161.svg
+    - assets/Windcompass/162.svg
+    - assets/Windcompass/163.svg
+    - assets/Windcompass/164.svg
+    - assets/Windcompass/165.svg
+    - assets/Windcompass/166.svg
+    - assets/Windcompass/167.svg
+    - assets/Windcompass/168.svg
+    - assets/Windcompass/169.svg
+    - assets/Windcompass/170.svg
+    - assets/Windcompass/171.svg
+    - assets/Windcompass/172.svg
+    - assets/Windcompass/173.svg
+    - assets/Windcompass/174.svg
+    - assets/Windcompass/175.svg
+    - assets/Windcompass/176.svg
+    - assets/Windcompass/177.svg
+    - assets/Windcompass/178.svg
+    - assets/Windcompass/179.svg
+    - assets/Windcompass/180.svg
+    - assets/Windcompass/181.svg
+    - assets/Windcompass/182.svg
+    - assets/Windcompass/183.svg
+    - assets/Windcompass/184.svg
+    - assets/Windcompass/185.svg
+    - assets/Windcompass/186.svg
+    - assets/Windcompass/187.svg
+    - assets/Windcompass/188.svg
+    - assets/Windcompass/189.svg
+    - assets/Windcompass/190.svg
+    - assets/Windcompass/191.svg
+    - assets/Windcompass/192.svg
+    - assets/Windcompass/193.svg
+    - assets/Windcompass/194.svg
+    - assets/Windcompass/195.svg
+    - assets/Windcompass/196.svg
+    - assets/Windcompass/197.svg
+    - assets/Windcompass/198.svg
+    - assets/Windcompass/199.svg
+    - assets/Windcompass/200.svg
+    - assets/Windcompass/201.svg
+    - assets/Windcompass/202.svg
+    - assets/Windcompass/203.svg
+    - assets/Windcompass/204.svg
+    - assets/Windcompass/205.svg
+    - assets/Windcompass/206.svg
+    - assets/Windcompass/207.svg
+    - assets/Windcompass/208.svg
+    - assets/Windcompass/209.svg
+    - assets/Windcompass/210.svg
+    - assets/Windcompass/211.svg
+    - assets/Windcompass/212.svg
+    - assets/Windcompass/213.svg
+    - assets/Windcompass/214.svg
+    - assets/Windcompass/215.svg
+    - assets/Windcompass/216.svg
+    - assets/Windcompass/217.svg
+    - assets/Windcompass/218.svg
+    - assets/Windcompass/219.svg
+    - assets/Windcompass/220.svg
+    - assets/Windcompass/221.svg
+    - assets/Windcompass/222.svg
+    - assets/Windcompass/223.svg
+    - assets/Windcompass/224.svg
+    - assets/Windcompass/225.svg
+    - assets/Windcompass/226.svg
+    - assets/Windcompass/227.svg
+    - assets/Windcompass/228.svg
+    - assets/Windcompass/229.svg
+    - assets/Windcompass/230.svg
+    - assets/Windcompass/231.svg
+    - assets/Windcompass/232.svg
+    - assets/Windcompass/233.svg
+    - assets/Windcompass/234.svg
+    - assets/Windcompass/235.svg
+    - assets/Windcompass/236.svg
+    - assets/Windcompass/237.svg
+    - assets/Windcompass/238.svg
+    - assets/Windcompass/239.svg
+    - assets/Windcompass/240.svg
+    - assets/Windcompass/241.svg
+    - assets/Windcompass/242.svg
+    - assets/Windcompass/243.svg
+    - assets/Windcompass/244.svg
+    - assets/Windcompass/245.svg
+    - assets/Windcompass/246.svg
+    - assets/Windcompass/247.svg
+    - assets/Windcompass/248.svg
+    - assets/Windcompass/249.svg
+    - assets/Windcompass/250.svg
+    - assets/Windcompass/251.svg
+    - assets/Windcompass/252.svg
+    - assets/Windcompass/253.svg
+    - assets/Windcompass/254.svg
+    - assets/Windcompass/255.svg
+    - assets/Windcompass/256.svg
+    - assets/Windcompass/257.svg
+    - assets/Windcompass/258.svg
+    - assets/Windcompass/259.svg
+    - assets/Windcompass/260.svg
+    - assets/Windcompass/261.svg
+    - assets/Windcompass/262.svg
+    - assets/Windcompass/263.svg
+    - assets/Windcompass/264.svg
+    - assets/Windcompass/265.svg
+    - assets/Windcompass/266.svg
+    - assets/Windcompass/267.svg
+    - assets/Windcompass/268.svg
+    - assets/Windcompass/269.svg
+    - assets/Windcompass/270.svg
+    - assets/Windcompass/271.svg
+    - assets/Windcompass/272.svg
+    - assets/Windcompass/273.svg
+    - assets/Windcompass/274.svg
+    - assets/Windcompass/275.svg
+    - assets/Windcompass/276.svg
+    - assets/Windcompass/277.svg
+    - assets/Windcompass/278.svg
+    - assets/Windcompass/279.svg
+    - assets/Windcompass/280.svg
+    - assets/Windcompass/281.svg
+    - assets/Windcompass/282.svg
+    - assets/Windcompass/283.svg
+    - assets/Windcompass/284.svg
+    - assets/Windcompass/285.svg
+    - assets/Windcompass/286.svg
+    - assets/Windcompass/287.svg
+    - assets/Windcompass/288.svg
+    - assets/Windcompass/289.svg
+    - assets/Windcompass/290.svg
+    - assets/Windcompass/291.svg
+    - assets/Windcompass/292.svg
+    - assets/Windcompass/293.svg
+    - assets/Windcompass/294.svg
+    - assets/Windcompass/295.svg
+    - assets/Windcompass/296.svg
+    - assets/Windcompass/297.svg
+    - assets/Windcompass/298.svg
+    - assets/Windcompass/299.svg
+    - assets/Windcompass/308.svg
+    - assets/Windcompass/309.svg
+    - assets/Windcompass/310.svg
+    - assets/Windcompass/311.svg
+    - assets/Windcompass/312.svg
+    - assets/Windcompass/313.svg
+    - assets/Windcompass/314.svg
+    - assets/Windcompass/315.svg
+    - assets/Windcompass/316.svg
+    - assets/Windcompass/317.svg
+    - assets/Windcompass/318.svg
+    - assets/Windcompass/319.svg
+    - assets/Windcompass/320.svg
+    - assets/Windcompass/321.svg
+    - assets/Windcompass/322.svg
+    - assets/Windcompass/323.svg
+    - assets/Windcompass/324.svg
+    - assets/Windcompass/325.svg
+    - assets/Windcompass/326.svg
+    - assets/Windcompass/327.svg
+    - assets/Windcompass/328.svg
+    - assets/Windcompass/329.svg
+    - assets/Windcompass/330.svg
+    - assets/Windcompass/331.svg
+    - assets/Windcompass/332.svg
+    - assets/Windcompass/333.svg
+    - assets/Windcompass/334.svg
+    - assets/Windcompass/335.svg
+    - assets/Windcompass/336.svg
+    - assets/Windcompass/337.svg
+    - assets/Windcompass/338.svg
+    - assets/Windcompass/339.svg
+    - assets/Windcompass/340.svg
+    - assets/Windcompass/341.svg
+    - assets/Windcompass/342.svg
+    - assets/Windcompass/343.svg
+    - assets/Windcompass/344.svg
+    - assets/Windcompass/345.svg
+    - assets/Windcompass/346.svg
+    - assets/Windcompass/347.svg
+    - assets/Windcompass/348.svg
+    - assets/Windcompass/349.svg
+    - assets/Windcompass/350.svg
+    - assets/Windcompass/351.svg
+    - assets/Windcompass/352.svg
+    - assets/Windcompass/353.svg
+    - assets/Windcompass/354.svg
+    - assets/Windcompass/355.svg
+    - assets/Windcompass/356.svg
+    - assets/Windcompass/357.svg
+    - assets/Windcompass/358.svg
+    - assets/Windcompass/359.svg
+
+    - assets/UV/0.svg
+    - assets/UV/1.svg
+    - assets/UV/2.svg
+    - assets/UV/3.svg
+    - assets/UV/4.svg
+    - assets/UV/5.svg
+    - assets/UV/6.svg
+
+    - assets/Sun/Sunrise.svg
+    - assets/Sun/Sunset.svg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: DotMatrix
+      fonts:
+        - asset: fonts/dotMatrix.ttf
+    - family: NotoSansMono
+      fonts:
+        - asset: fonts/NotoSansMono-Light.ttf
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
