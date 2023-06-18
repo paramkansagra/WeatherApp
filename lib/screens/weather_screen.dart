@@ -39,17 +39,31 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      Duration.zero,
+      () {
+        ref
+            .watch(ApiProvider.notifier)
+            .setPoints(widget.longitude, widget.latitude);
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     ref.watch(ApiProvider.notifier).getWeather();
 
     ref.listen(
       ApiProvider,
       (previous, next) {
-        if (previous.toString() != next.toString())
+        if (previous.toString() != next.toString()) {
           setState(() {
-            log(previous.toString());
-            log(next.toString());
+            log("previous ---->  " + previous.toString());
+            log("next ---->  " + next.toString());
           });
+        }
       },
     );
 
@@ -98,8 +112,13 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         // giving a trailing icon for settings
         actions: [
           IconButton(
-            onPressed: () {
-              ApiNotifier().getWeather();
+            onPressed: () async {
+              await Future.delayed(
+                Duration.zero,
+                () async {
+                  await ref.watch(ApiProvider.notifier).changeTempUnit(false);
+                },
+              );
             },
             icon: const Icon(
               Icons.settings_outlined,
