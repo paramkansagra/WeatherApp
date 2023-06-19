@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/widgets/screen_devider.dart';
 
 class SettingsScreen extends StatefulWidget {
-  SettingsScreen({super.key, required this.celcius});
+  SettingsScreen({super.key, required this.celcius, required this.wind});
 
-  bool celcius;
+  bool celcius, wind;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -17,7 +18,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_sharp),
           onPressed: () {
-            Navigator.of(context).pop(widget.celcius);
+            Navigator.of(context).pop([widget.celcius, widget.wind]);
           },
         ),
       ),
@@ -75,6 +76,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
               title: Text(
                 "Fahrenhite",
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+              ),
+            ),
+            ScreenDevider(
+              color:
+                  Theme.of(context).colorScheme.onBackground.withOpacity(0.3),
+            ),
+            Text(
+              "WIND SPEED",
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RadioListTile(
+              value: true,
+              groupValue: widget.wind,
+              controlAffinity: ListTileControlAffinity.trailing,
+              contentPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              activeColor: Theme.of(context).colorScheme.onBackground,
+              onChanged: (value) {
+                widget.wind = true;
+                setState(() {});
+              },
+              title: Text(
+                "KM/H",
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+              ),
+            ),
+            RadioListTile(
+              value: false,
+              groupValue: widget.wind,
+              controlAffinity: ListTileControlAffinity.trailing,
+              contentPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              activeColor: Theme.of(context).colorScheme.onBackground,
+              onChanged: (value) {
+                widget.wind = false;
+                setState(() {});
+              },
+              title: Text(
+                "MPH",
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.w300,
                     ),

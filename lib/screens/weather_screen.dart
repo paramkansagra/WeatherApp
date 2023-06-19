@@ -92,9 +92,12 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
       sunset: "10:10",
     );
 
+    List<String> kmh = ["kmh"];
+
     if (ref.read(ApiProvider.notifier).dailyData.length != 0) {
       currentData = ref.read(ApiProvider.notifier).dailyData[0];
       weeklyWeather = ref.read(ApiProvider.notifier).weeklyData[0];
+      kmh = ref.read(ApiProvider.notifier).windUnit;
     }
 
     return Scaffold(
@@ -119,14 +122,18 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         actions: [
           IconButton(
             onPressed: () async {
-              bool temp = ref.read(ApiProvider.notifier).getTempUnit();
-              var isCelcius = await Navigator.of(context).push(
+              bool tempU = ref.read(ApiProvider.notifier).getTempUnit();
+              bool windU = ref.read(ApiProvider.notifier).getWindUnit();
+              var units = await Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (ctx) => SettingsScreen(celcius: temp),
+                  builder: (ctx) => SettingsScreen(
+                    celcius: tempU,
+                    wind: windU,
+                  ),
                 ),
               );
-              log("$isCelcius");
-              await ref.watch(ApiProvider.notifier).changeTempUnit(isCelcius);
+              log("temprature -> ${units[0]} wind -> ${units[1]}");
+              await ref.watch(ApiProvider.notifier).changeUnit(units);
               setState(() {});
             },
             icon: const Icon(
@@ -183,7 +190,9 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
               paddingBetween(),
 
               // screen devider
-              const ScreenDevider(),
+              ScreenDevider(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
 
               paddingBetween(),
 
@@ -215,8 +224,10 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                 physics: NeverScrollableScrollPhysics(),
                 children: [
                   WindSpeedWidget(
-                      speed: currentData.windSpeed,
-                      direction: currentData.windDirection),
+                    speed: currentData.windSpeed,
+                    direction: currentData.windDirection,
+                    kmh: kmh[0],
+                  ),
                   UVCircleWidget(uvIndex: currentData.uvIndex),
                 ],
               ),

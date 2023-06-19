@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
 class ScreenDevider extends StatelessWidget {
-  const ScreenDevider({super.key});
+  ScreenDevider({super.key, required this.color});
+
+  final color;
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Divider(),
+          child: Divider(
+            color: color,
+          ),
         ),
       ],
     );

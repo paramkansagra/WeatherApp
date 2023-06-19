@@ -12,11 +12,12 @@ class ApiCall {
     this.longitude,
     this.latitude,
     this.currentWeather,
-    this.add,
+    this.tempAdd,
+    this.windAdd,
     this.isChanged,
   );
 
-  final longitude, latitude, currentWeather, add, isChanged;
+  final longitude, latitude, currentWeather, tempAdd, isChanged, windAdd;
   Map<String, dynamic> _data = {};
   Map<String, dynamic> _airQuality = {};
 
@@ -42,9 +43,9 @@ class ApiCall {
     await callAirQualityAPI();
 
     String currentWeatherAPI =
-        "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&hourly=temperature_2m,is_day,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m,winddirection_10m,uv_index_clear_sky&models=best_match&forecast_days=2&timezone=auto&temperature_unit=$add";
+        "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&hourly=temperature_2m,is_day,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m,winddirection_10m,uv_index_clear_sky&models=best_match&forecast_days=2&timezone=auto&temperature_unit=$tempAdd&windspeed_unit=$windAdd";
     String futureWeatherAPI =
-        "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&models=best_match&daily=sunrise,sunset,weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&temperature_unit=$add";
+        "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&models=best_match&daily=sunrise,sunset,weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&temperature_unit=$tempAdd&windspeed_unit=$windAdd";
     final url =
         Uri.parse(currentWeather ? currentWeatherAPI : futureWeatherAPI);
     final responce = await http.get(url);
