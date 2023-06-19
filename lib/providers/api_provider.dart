@@ -20,6 +20,14 @@ class ApiNotifier extends StateNotifier<Map<String, List<dynamic>>> {
   var weeklyData = [];
   var tempUnit = ["celsius"];
 
+  bool getTempUnit() {
+    bool temp = true;
+    if (tempUnit[0] == "fahrenheit") {
+      temp = false;
+    }
+    return temp;
+  }
+
   // make an api call to get the data set into the super class
   void setPoints(double longitude, double latitude) async {
     this.longitude = longitude;

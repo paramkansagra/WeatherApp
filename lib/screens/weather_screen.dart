@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/models/daily_weather.dart';
 import 'package:weather_app/models/weekly_weather.dart';
 import 'package:weather_app/providers/api_provider.dart';
+import 'package:weather_app/screens/settings_screen.dart';
 import 'package:weather_app/widgets/air_quality_compass_widget.dart';
 import 'package:weather_app/widgets/air_quality_widget.dart';
 import 'package:weather_app/widgets/daily_weather_list.dart';
@@ -105,7 +106,12 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         // giving the title of the app bar
         title: Text(
           title.toUpperCase(),
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                fontFamily: "DotMatrix",
+                fontSize: 30,
+                color:
+                    Theme.of(context).colorScheme.onBackground.withOpacity(1),
+              ),
         ),
         centerTitle: true,
 
@@ -113,7 +119,14 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         actions: [
           IconButton(
             onPressed: () async {
-              await ref.watch(ApiProvider.notifier).changeTempUnit(false);
+              bool temp = ref.read(ApiProvider.notifier).getTempUnit();
+              var isCelcius = await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => SettingsScreen(celcius: temp),
+                ),
+              );
+              log("$isCelcius");
+              await ref.watch(ApiProvider.notifier).changeTempUnit(isCelcius);
               setState(() {});
             },
             icon: const Icon(
