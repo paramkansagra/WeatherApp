@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key, required this.celcius});
+  SettingsScreen({super.key, required this.celcius});
 
-  final celcius;
+  bool celcius;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -24,6 +24,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "SETTINGS",
@@ -32,6 +33,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontWeight: FontWeight.w300,
                     fontFamily: "DotMatrix",
                   ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              "UNITS",
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RadioListTile(
+              value: true,
+              groupValue: widget.celcius,
+              controlAffinity: ListTileControlAffinity.trailing,
+              contentPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              activeColor: Theme.of(context).colorScheme.onBackground,
+              onChanged: (value) {
+                widget.celcius = true;
+                setState(() {});
+              },
+              title: Text("Celcius"),
+            ),
+            RadioListTile(
+              value: false,
+              groupValue: widget.celcius,
+              controlAffinity: ListTileControlAffinity.trailing,
+              contentPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              activeColor: Theme.of(context).colorScheme.onBackground,
+              onChanged: (value) {
+                widget.celcius = false;
+                setState(() {});
+              },
+              title: Text("Fahrenhite"),
             ),
           ],
         ),
