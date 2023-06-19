@@ -56,7 +56,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 widget.celcius = true;
                 setState(() {});
               },
-              title: Text("Celcius"),
+              title: Text(
+                "Celcius",
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+              ),
             ),
             RadioListTile(
               value: false,
@@ -68,7 +73,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 widget.celcius = false;
                 setState(() {});
               },
-              title: Text("Fahrenhite"),
+              title: Text(
+                "Fahrenhite",
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+              ),
             ),
           ],
         ),
