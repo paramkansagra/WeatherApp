@@ -9,7 +9,7 @@ class HourlyWeatherList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<dynamic> dailyWeatherList =
-        ref.read(ApiProvider.notifier).dailyData;
+        ref.watch(ApiProvider.notifier).dailyData;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12),

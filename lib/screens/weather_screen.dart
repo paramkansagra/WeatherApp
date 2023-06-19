@@ -40,7 +40,6 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
 
   @override
   void initState() {
-    super.initState();
     Future.delayed(
       Duration.zero,
       () {
@@ -49,6 +48,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
             .setPoints(widget.longitude, widget.latitude);
       },
     );
+    super.initState();
   }
 
   @override
@@ -113,12 +113,8 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         actions: [
           IconButton(
             onPressed: () async {
-              await Future.delayed(
-                Duration.zero,
-                () async {
-                  await ref.watch(ApiProvider.notifier).changeTempUnit(false);
-                },
-              );
+              await ref.watch(ApiProvider.notifier).changeTempUnit(false);
+              setState(() {});
             },
             icon: const Icon(
               Icons.settings_outlined,
@@ -176,7 +172,6 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
               // screen devider
               const ScreenDevider(),
 
-              // padding
               paddingBetween(),
 
               // hourly weather list

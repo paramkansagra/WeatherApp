@@ -13,11 +13,9 @@ class HourlyWeather extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String image = "";
+    String image = dailyWeather.weatherCode;
 
-    if (dailyWeather.isDay == 1) {
-      image = dailyWeather.weatherCode;
-    } else {
+    if (dailyWeather.isDay == 0) {
       if (dailyWeather.weatherCode == "assets/images/Clouds.svg") {
         image = "assets/images/CloudyNight.svg";
       }
