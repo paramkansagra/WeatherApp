@@ -11,11 +11,11 @@ Tech stack used:-
     SQL used to save the data locally.
 
 TODO:-  
-    1. Add the API for weather  ✅  
-    2. Change the icons based on the weather codes. ✅   
-    3. Add the API for AQI ✅  
+    1. ~~Add the API for weather~~  ✅  
+    2. ~~Change the icons based on the weather codes.~~ ✅   
+    3. ~~Add the API for AQI~~ ✅  
     4. Add screen for different cities  
-    5. Add screen for settings for different parameters like kmph or mph / celcius or farenhite etc.
+    5. ~~Add screen for settings for different parameters like kmph or mph / celcius or farenhite etc~~✅
 
 Current Progress:-
     ![plot](./screenshots/Screenshot_1686632733.png "HomeScreen") ![plot](./screenshots/Screenshot_1686632737.png "HomeScreen2")
