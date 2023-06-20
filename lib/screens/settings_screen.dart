@@ -2,15 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/widgets/screen_devider.dart';
 
 class SettingsScreen extends StatefulWidget {
-  SettingsScreen({super.key, required this.celcius, required this.wind});
+  const SettingsScreen({super.key, required this.celcius, required this.wind});
 
-  bool celcius, wind;
+  final celcius, wind;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  bool celcius = true, wind = true;
+
+  @override
+  void initState() {
+    super.initState();
+    celcius = widget.celcius;
+    wind = widget.wind;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_sharp),
           onPressed: () {
-            Navigator.of(context).pop([widget.celcius, widget.wind]);
+            Navigator.of(context).pop([celcius, wind]);
           },
         ),
       ),
@@ -50,12 +59,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               RadioListTile(
                 value: true,
-                groupValue: widget.celcius,
+                groupValue: celcius,
                 controlAffinity: ListTileControlAffinity.trailing,
                 contentPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (value) {
-                  widget.celcius = true;
+                  celcius = true;
                   setState(() {});
                 },
                 title: Text(
@@ -67,12 +76,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               RadioListTile(
                 value: false,
-                groupValue: widget.celcius,
+                groupValue: celcius,
                 controlAffinity: ListTileControlAffinity.trailing,
                 contentPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (value) {
-                  widget.celcius = false;
+                  celcius = false;
                   setState(() {});
                 },
                 title: Text(
@@ -97,12 +106,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               RadioListTile(
                 value: true,
-                groupValue: widget.wind,
+                groupValue: wind,
                 controlAffinity: ListTileControlAffinity.trailing,
                 contentPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (value) {
-                  widget.wind = true;
+                  wind = true;
                   setState(() {});
                 },
                 title: Text(
@@ -114,12 +123,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               RadioListTile(
                 value: false,
-                groupValue: widget.wind,
+                groupValue: wind,
                 controlAffinity: ListTileControlAffinity.trailing,
                 contentPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (value) {
-                  widget.wind = false;
+                  wind = false;
                   setState(() {});
                 },
                 title: Text(
