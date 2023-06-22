@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/api/api_call.dart';
 
@@ -11,6 +12,7 @@ class ApiNotifier extends StateNotifier<Map<String, List<dynamic>>> {
             "tempUnit": ["celsius"],
             "windUnit": ["kmh"],
             "points": [0, 0],
+            "name": ["guwahati"],
           },
         ); // making an empty api provider and giving the super class an empty map
 
@@ -21,6 +23,7 @@ class ApiNotifier extends StateNotifier<Map<String, List<dynamic>>> {
   var weeklyData = [];
   var tempUnit = ["celsius"];
   var windUnit = ["kmh"];
+  var name = ["guwahati"];
 
   bool getTempUnit() {
     bool temp = true;
@@ -37,11 +40,12 @@ class ApiNotifier extends StateNotifier<Map<String, List<dynamic>>> {
   }
 
   // make an api call to get the data set into the super class
-  void setPoints(double longitude, double latitude) async {
+  void setPoints(double longitude, double latitude, String name) async {
     this.longitude = longitude;
     this.latitude = latitude;
     tempUnit = ["celsius"];
     windUnit = ["kmh"];
+    this.name = [name];
 
     state = await {
       "daily": dailyData,
@@ -49,6 +53,7 @@ class ApiNotifier extends StateNotifier<Map<String, List<dynamic>>> {
       "tempUnit": tempUnit,
       "windUnit": windUnit,
       "points": [longitude, latitude],
+      "name": this.name,
     };
   }
 
@@ -92,6 +97,45 @@ class ApiNotifier extends StateNotifier<Map<String, List<dynamic>>> {
       "tempUnit": tempUnit,
       "windUnit": windUnit,
       "points": [longitude, latitude],
+      "name": name,
+    };
+  }
+
+  Future<void> changeCity(List<dynamic> change) async {
+    longitude = change[0];
+    latitude = change[1];
+    name = [change[2]];
+
+    var api = ApiCall(
+      longitude,
+      latitude,
+      true,
+      tempUnit[0],
+      windUnit[0],
+      true,
+    );
+    await api.callAPI();
+    dailyData = api.getDailyWeather();
+
+    api = ApiCall(
+      longitude,
+      latitude,
+      false,
+      tempUnit[0],
+      windUnit[0],
+      true,
+    );
+    await api.callAPI();
+
+    weeklyData = api.getWeeklyWeather();
+
+    state = {
+      "daily": dailyData,
+      "weekly": weeklyData,
+      "tempUnit": tempUnit,
+      "windUnit": windUnit,
+      "points": [longitude, latitude],
+      "name": name,
     };
   }
 
@@ -125,9 +169,12 @@ class ApiNotifier extends StateNotifier<Map<String, List<dynamic>>> {
       "tempUnit": tempUnit,
       "windUnit": windUnit,
       "points": [longitude, latitude],
+      "name": name,
     };
   }
 }
 
 final StateNotifierProvider<ApiNotifier, Map<String, dynamic>> ApiProvider =
-    StateNotifierProvider((ref) => ApiNotifier());
+    StateNotifierProvider((ref) {
+  return ApiNotifier();
+});

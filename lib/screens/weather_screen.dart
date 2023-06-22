@@ -1,10 +1,10 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/models/daily_weather.dart';
 import 'package:weather_app/models/weekly_weather.dart';
 import 'package:weather_app/providers/api_provider.dart';
+import 'package:weather_app/screens/cities_screen.dart';
 import 'package:weather_app/screens/settings_screen.dart';
 import 'package:weather_app/widgets/air_quality_compass_widget.dart';
 import 'package:weather_app/widgets/air_quality_widget.dart';
@@ -30,7 +30,7 @@ class WeatherScreen extends ConsumerStatefulWidget {
 }
 
 class _WeatherScreenState extends ConsumerState<WeatherScreen> {
-  final String title = "guwahati";
+  String title = "guwahati";
   final String add = "\u00B0";
 
   SizedBox paddingBetween() {
@@ -46,7 +46,8 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
       () {
         ref
             .watch(ApiProvider.notifier)
-            .setPoints(widget.longitude, widget.latitude);
+            .setPoints(widget.longitude, widget.latitude, title);
+        title = ref.read(ApiProvider.notifier).name[0];
       },
     );
     super.initState();
@@ -54,12 +55,12 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(ApiProvider.notifier).getWeather();
+    if (mounted) ref.watch(ApiProvider.notifier).getWeather();
 
     ref.listen(
       ApiProvider,
       (previous, next) {
-        if (previous.toString() != next.toString()) {
+        if (previous.toString() != next.toString() && mounted) {
           setState(() {
             log("previous ---->  " + previous.toString());
             log("next ---->  " + next.toString());
@@ -98,6 +99,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
       currentData = ref.read(ApiProvider.notifier).dailyData[0];
       weeklyWeather = ref.read(ApiProvider.notifier).weeklyData[0];
       kmh = ref.read(ApiProvider.notifier).windUnit;
+      title = ref.read(ApiProvider.notifier).name[0];
     }
 
     return Scaffold(
@@ -134,7 +136,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
               );
               log("temprature -> ${units[0]} wind -> ${units[1]}");
               await ref.watch(ApiProvider.notifier).changeUnit(units);
-              setState(() {});
+              if (mounted) setState(() {});
             },
             icon: const Icon(
               Icons.settings_outlined,
@@ -147,7 +149,20 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
           icon: const Icon(
             Icons.view_list_outlined,
           ),
-          onPressed: () {},
+          onPressed: () async {
+            double longitude = ref.read(ApiProvider.notifier).longitude;
+            double latitude = ref.read(ApiProvider.notifier).latitude;
+            title = ref.read(ApiProvider.notifier).name[0];
+            // info would be of the form longitude latitude and the name of the place
+            var info = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CitiesScreen(),
+              ),
+            );
+            log("longitude -> ${info[0]} latitude -> ${info[1]} name -> ${info[2]}");
+            await ref.watch(ApiProvider.notifier).changeCity(info);
+            if (mounted) setState(() {});
+          },
         ),
       ),
 

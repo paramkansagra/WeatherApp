@@ -65,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (value) {
                   celcius = true;
-                  setState(() {});
+                  if (mounted) setState(() {});
                 },
                 title: Text(
                   "Celcius",
@@ -82,7 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (value) {
                   celcius = false;
-                  setState(() {});
+                  if (mounted) setState(() {});
                 },
                 title: Text(
                   "Fahrenhite",
@@ -112,7 +112,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (value) {
                   wind = true;
-                  setState(() {});
+                  if (mounted) setState(() {});
                 },
                 title: Text(
                   "KM/H",
@@ -129,7 +129,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 activeColor: Theme.of(context).colorScheme.onBackground,
                 onChanged: (value) {
                   wind = false;
-                  setState(() {});
+                  if (mounted) setState(() {});
                 },
                 title: Text(
                   "MPH",
