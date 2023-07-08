@@ -156,10 +156,12 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
             // info would be of the form longitude latitude and the name of the place
             var info = await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => CitiesScreen(
-                  latitude: latitude,
-                  longitude: longitude,
-                  name: title,
+                builder: (context) => ProviderScope(
+                  child: CitiesScreen(
+                    latitude: latitude,
+                    longitude: longitude,
+                    name: title,
+                  ),
                 ),
               ),
             );

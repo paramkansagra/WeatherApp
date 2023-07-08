@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/providers/api_provider.dart';
+import 'package:weather_app/providers/cities_provider.dart';
+import 'package:weather_app/screens/add_city_screen.dart';
 import 'package:weather_app/widgets/cities_tiles.dart';
 import 'package:weather_app/widgets/screen_devider.dart';
 
-class CitiesScreen extends StatefulWidget {
+class CitiesScreen extends ConsumerStatefulWidget {
   const CitiesScreen({
     super.key,
     required this.latitude,
@@ -15,35 +16,26 @@ class CitiesScreen extends StatefulWidget {
   final longitude, latitude, name;
 
   @override
-  State<CitiesScreen> createState() => _CitiesScreenState();
+  ConsumerState<CitiesScreen> createState() => _CitiesScreenState();
 }
 
-class _CitiesScreenState extends State<CitiesScreen> {
-  var citiesList = [];
-
-  @override
-  void initState() {
-    super.initState();
-    citiesList = [
-      CitiesTile(
-        latitude: 13.09,
-        longitude: 80.28,
-        temprature: 20,
-        name: "Chennai",
-        weatherCode: "Sunny",
-      ),
-      CitiesTile(
-        latitude: 22.47,
-        longitude: 70.07,
-        temprature: 20,
-        name: "Jamnagar",
-        weatherCode: "Sunny",
-      ),
-    ];
-  }
+class _CitiesScreenState extends ConsumerState<CitiesScreen> {
+  List<CitiesTile> citiesList = [];
 
   @override
   Widget build(BuildContext context) {
+    var cities = ref.watch(CitiesProvider.notifier).getCities();
+    citiesList = cities
+        .map(
+          (item) => CitiesTile(
+            latitude: item["latitude"],
+            longitude: item["longitude"],
+            name: item["name"],
+            temprature: item["temprature"],
+            weatherCode: item["weather_code"],
+          ),
+        )
+        .toList();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -60,6 +52,18 @@ class _CitiesScreenState extends State<CitiesScreen> {
             ],
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AddCity(),
+                ),
+              );
+            },
+            icon: Icon(Icons.add_sharp),
+          )
+        ],
         title: Text(
           "LOCATIONS",
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
