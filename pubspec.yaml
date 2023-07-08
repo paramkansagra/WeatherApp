@@ -390,6 +390,14 @@ flutter:
     - assets/Windcompass/297.svg
     - assets/Windcompass/298.svg
     - assets/Windcompass/299.svg
+    - assets/Windcompass/300.svg
+    - assets/Windcompass/301.svg
+    - assets/Windcompass/302.svg
+    - assets/Windcompass/303.svg
+    - assets/Windcompass/304.svg
+    - assets/Windcompass/305.svg
+    - assets/Windcompass/306.svg
+    - assets/Windcompass/307.svg
     - assets/Windcompass/308.svg
     - assets/Windcompass/309.svg
     - assets/Windcompass/310.svg
@@ -443,7 +451,6 @@ flutter:
     - assets/Windcompass/358.svg
     - assets/Windcompass/359.svg
     - assets/Windcompass/360.svg
-
 
     - assets/UV/0.svg
     - assets/UV/1.svg
