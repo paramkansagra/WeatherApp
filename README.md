@@ -14,8 +14,12 @@ TODO:-
     1. ~~Add the API for weather~~  ✅  
     2. ~~Change the icons based on the weather codes.~~ ✅   
     3. ~~Add the API for AQI~~ ✅  
-    4. Add screen for different cities  
-    5. ~~Add screen for settings for different parameters like kmph or mph / celcius or farenhite etc~~✅
+    4. ~~Add screen for different cities~~ ✅  
+    5. ~~Add screen for settings for different parameters like kmph or mph / celcius or farenhite etc~~✅  
+    6. Add support for choosing the city
+    7. Add support for checking if data is syncing or not
+    8. Store the cities in the phone locally
+    9. Store the last synced data in the phone
 
 Current Progress:-
     ![plot](./screenshots/Screenshot_1686632733.png "HomeScreen") ![plot](./screenshots/Screenshot_1686632737.png "HomeScreen2")
