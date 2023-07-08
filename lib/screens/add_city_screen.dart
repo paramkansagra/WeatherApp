@@ -10,17 +10,11 @@ class AddCity extends StatefulWidget {
 }
 
 class _AddCityState extends State<AddCity> {
-  // defining a controller to get the value out of the text box
-  final textEditController = TextEditingController();
+  // Making a string to store the name of the city
+  String cityName = "";
 
-  // making a dispose function to dispose off the text edit contoller
-  @override
-  void dispose() {
-    // disposing off the text edit contoller
-    textEditController.dispose();
-    // going to the upper dispose
-    super.dispose();
-  }
+  // Making a form key to use the validator function any where
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +38,9 @@ class _AddCityState extends State<AddCity> {
         child: Column(
           children: [
             // defining the text feild so that we get the city name
+            TextFormField(
+              key: _formKey,
 
-            TextField(
               // giving the cursor the color
               cursorColor: Theme.of(context).colorScheme.onBackground,
 
@@ -63,6 +58,37 @@ class _AddCityState extends State<AddCity> {
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
+
+                // giving a suffix icon to search the data and easing our work
+                suffixIcon: IconButton(
+                  // giving a search icon
+                  icon: Icon(Icons.search_sharp),
+
+                  // giving a on pressed function
+                  onPressed: () {
+                    // if the cityName is empty then give an error snack bar
+                    if (cityName.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "Please Enter City Name",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                ),
+                          ),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
 
               // giving the input text a style
@@ -70,11 +96,8 @@ class _AddCityState extends State<AddCity> {
                     fontWeight: FontWeight.w300,
                   ),
 
-              // giving the text feild the controller
-              controller: textEditController,
-
               // on changed so that we can get the data from the text edit contoller
-              onChanged: (value) => log(textEditController.text),
+              onChanged: (value) => cityName = value,
             ),
           ],
         ),
