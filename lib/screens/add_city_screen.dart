@@ -1,7 +1,6 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:weather_app/api/cities_list_api_call.dart';
+import 'package:weather_app/models/city_names.dart';
 import 'package:weather_app/widgets/add_city_tile.dart';
 
 class AddCity extends StatefulWidget {
@@ -22,59 +21,51 @@ class _AddCityState extends State<AddCity> {
   bool circularProgressIndicatorFlag = false;
 
   // make a list of cities which we will get in the fetch call
-  List<Map<dynamic, dynamic>> citiesList = [
-    {
-      "cityName": "Guwhati",
-      "country": "India",
-      "admins": "Assam",
-      "latitude": 0.0,
-      "longitude": 0.0,
-    },
-    {
-      "cityName": "Jamnagar",
-      "country": "India",
-      "admins": "Jamnagar, Gujarat",
-      "latitude": 0.0,
-      "longitude": 0.0,
-    },
-    {
-      "cityName": "Porbandar",
-      "country": "India",
-      "admins": "Porbandar, Gujarat",
-      "latitude": 0.0,
-      "longitude": 0.0,
-    },
-    {
-      "cityName": "Motikhavdi",
-      "country": "India",
-      "admins": "Jamnagar, Gujarat",
-      "latitude": 0.0,
-      "longitude": 0.0,
-    },
-    {
-      "cityName": "Chennai",
-      "country": "India",
-      "admins": "Tamil Nadu, Chennai",
-      "latitude": 0.0,
-      "longitude": 0.0,
-    },
-  ];
+  List<CityName> citiesList = [];
 
   // making a function to return list of cities which are coming in
   Widget listOfCities() {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: citiesList.length,
-          itemBuilder: (ctx, index) => AddCityTile(
-            cityName: citiesList[index]["cityName"],
-            country: citiesList[index]["country"],
-            admins: citiesList[index]["admins"],
-            latitude: citiesList[index]["latitude"],
-            longitude: citiesList[index]["longitude"],
+    if (citiesList.length > 0)
+      return Expanded(
+        child: SingleChildScrollView(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: citiesList.length,
+            itemBuilder: (ctx, index) => AddCityTile(
+              cityName: citiesList[index].cityName,
+              country: citiesList[index].country,
+              admins: citiesList[index].admins,
+              latitude: citiesList[index].latitude,
+              longitude: citiesList[index].longitude,
+            ),
           ),
         ),
+      );
+    else {
+      return Expanded(
+        child: Text(
+          "No such city avaliable",
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w200,
+                fontSize: 25,
+                letterSpacing: 2,
+              ),
+        ),
+      );
+    }
+  }
+
+  void ShowSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        duration: Duration(seconds: 2),
       ),
     );
   }
@@ -107,6 +98,9 @@ class _AddCityState extends State<AddCity> {
               // giving the cursor the color
               cursorColor: Theme.of(context).colorScheme.onBackground,
 
+              // setting the auto focus as true
+              autofocus: true,
+
               // giving the underline color
               decoration: InputDecoration(
                 // hint text to add the city name
@@ -127,38 +121,51 @@ class _AddCityState extends State<AddCity> {
                   // giving a search icon
                   icon: Icon(Icons.search_sharp),
 
-                  // giving a on pressed function
-                  onPressed: () {
-                    // if the cityName is empty then give an error snack bar
-                    if (cityName.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            "Please Enter City Name",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground,
-                                ),
-                          ),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.background,
-                          duration: Duration(seconds: 2),
-                        ),
-                      );
-                    }
+                  disabledColor: Theme.of(context)
+                      .colorScheme
+                      .onBackground
+                      .withOpacity(0.8),
 
-                    // else we will be doing the api call
-                    else {
-                      setState(() {
-                        circularProgressIndicatorFlag =
-                            !circularProgressIndicatorFlag;
-                      });
-                    }
-                  },
+                  // giving a on pressed function
+                  // if the ciruclar progress indicator is true we will disable the search button
+                  onPressed: circularProgressIndicatorFlag
+                      ? null
+                      : () async {
+                          // if the cityName is empty then give an error snack bar
+                          if (cityName.trim().isEmpty) {
+                            ShowSnackBar("Please Enter City Name");
+                          }
+
+                          // if the lenght of city name is less than 2
+                          else if (cityName.trim().length <= 2) {
+                            ShowSnackBar("Please give a longer name");
+                          }
+
+                          // else we will be doing the api call
+                          else {
+                            // set the circular progress bar as true and make the api cal
+                            setState(
+                              () {
+                                circularProgressIndicatorFlag = true;
+                              },
+                            );
+
+                            // removing the keyboard from focus
+                            FocusManager.instance.primaryFocus?.unfocus();
+
+                            // make the api call and store the data in the cities list
+                            var apiObj = CitiesApiCall(name: cityName);
+                            await apiObj.callAPI();
+                            citiesList = apiObj.getData();
+
+                            // after storing data in cities list now show the list
+                            setState(
+                              () {
+                                circularProgressIndicatorFlag = false;
+                              },
+                            );
+                          }
+                        },
                 ),
               ),
 
@@ -175,10 +182,12 @@ class _AddCityState extends State<AddCity> {
             SizedBox(height: 10),
 
             //if the circular progress indiactor flag is true then we will show the indicator
-            if (circularProgressIndicatorFlag)
-              CircularProgressIndicator(
-                  color: Theme.of(context).colorScheme.onBackground),
-            if (!circularProgressIndicatorFlag) listOfCities(),
+            Container(
+              child: circularProgressIndicatorFlag
+                  ? CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.onBackground)
+                  : listOfCities(),
+            ),
           ],
         ),
       ),

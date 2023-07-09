@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/providers/cities_provider.dart';
@@ -54,12 +55,20 @@ class _CitiesScreenState extends ConsumerState<CitiesScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
+            onPressed: () async {
+              List<dynamic> cityData = await Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => AddCity(),
                 ),
               );
+              FocusManager.instance.primaryFocus?.unfocus();
+              if (cityData.isNotEmpty) {
+                await ref
+                    .watch(CitiesProvider.notifier)
+                    .addCity(cityData[0], cityData[1], cityData[2]);
+                setState(() {});
+                log(cityData.toString());
+              }
             },
             icon: Icon(Icons.add_sharp),
           )

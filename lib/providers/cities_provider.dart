@@ -32,7 +32,7 @@ class CitiesNotifier extends StateNotifier<List<Map<dynamic, dynamic>>> {
     Map<String, dynamic> returnData = {
       "longitude": _data["longitude"],
       "latitude": _data["latitude"],
-      "temprature": _data["current_weather"]["temprature"],
+      "temprature": _data["current_weather"]["temperature"].toInt(),
       "weather_code": _data["current_weather"]["weathercode"],
     };
 
