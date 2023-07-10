@@ -21,8 +21,11 @@ TODO:-
     8. Store the cities in the phone locally  
     9. Store the last synced data in the phone  
 
-Current Progress:-
-    ![plot](./screenshots/Screenshot_1686632733.png "HomeScreen") ![plot](./screenshots/Screenshot_1686632737.png "HomeScreen2")
+Screenshots:-
+<p>
+<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Screenshot_1686632733.png" width=200 />   
+<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Screenshot_1686632737.png" width=200 />
+</p>
 
 ## Getting Started
 
