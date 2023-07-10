@@ -32,6 +32,7 @@ class WeatherScreen extends ConsumerStatefulWidget {
 class _WeatherScreenState extends ConsumerState<WeatherScreen> {
   String title = "guwahati";
   final String add = "\u00B0";
+  bool loading = true;
 
   SizedBox paddingBetween() {
     return SizedBox(
@@ -60,6 +61,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     ref.listen(
       ApiProvider,
       (previous, next) {
+        loading = true;
         if (previous.toString() != next.toString() && mounted) {
           setState(() {
             log("previous ---->  " + previous.toString());
@@ -101,7 +103,6 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
       kmh = ref.read(ApiProvider.notifier).windUnit;
       title = ref.read(ApiProvider.notifier).name[0];
     }
-
     return Scaffold(
       // defining the app bar
       appBar: AppBar(
@@ -126,6 +127,8 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
             onPressed: () async {
               bool tempU = ref.read(ApiProvider.notifier).getTempUnit();
               bool windU = ref.read(ApiProvider.notifier).getWindUnit();
+              loading = true;
+              setState(() {});
               var units = await Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (ctx) => SettingsScreen(
@@ -136,6 +139,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
               );
               log("temprature -> ${units[0]} wind -> ${units[1]}");
               await ref.watch(ApiProvider.notifier).changeUnit(units);
+              loading = false;
               if (mounted) setState(() {});
             },
             icon: const Icon(
@@ -153,6 +157,10 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
             double longitude = ref.read(ApiProvider.notifier).longitude;
             double latitude = ref.read(ApiProvider.notifier).latitude;
             title = ref.read(ApiProvider.notifier).name[0];
+            // setting loading as true
+            loading = true;
+            setState(() {});
+
             // info would be of the form longitude latitude and the name of the place
             var info = await Navigator.of(context).push(
               MaterialPageRoute(
@@ -167,6 +175,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
             );
             log("longitude -> ${info[0]} latitude -> ${info[1]} name -> ${info[2]}");
             await ref.watch(ApiProvider.notifier).changeCity(info);
+            loading = false;
             if (mounted) setState(() {});
           },
         ),
@@ -178,6 +187,10 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              if (loading)
+                CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               // first row ka code
               GridView.count(
                 crossAxisCount: 2,
