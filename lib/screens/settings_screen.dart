@@ -149,6 +149,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   "Made with ❤️ by Param Kansagra",
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontWeight: FontWeight.w300,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onBackground
+                            .withOpacity(0.8),
                       ),
                 ),
               ),
