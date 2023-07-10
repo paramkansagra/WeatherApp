@@ -21,11 +21,19 @@ TODO:-
     8. Store the cities in the phone locally  
     9. Store the last synced data in the phone  
 
-Screenshots:-
-<p>
-<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Screenshot_1686632733.png" width=200 />   
-<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Screenshot_1686632737.png" width=200 />
-</p>
+Screenshots:-   
+Loading Screen   
+<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Loading%20Screen.png" width=200 />   
+Initial Screen   
+<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Initial%20Screen.png" width=200 />   
+Select City Screen   
+<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Select%20City%20Screen.png" width=200 />   
+Search City   
+<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Search%20City.png" width=200 />   
+New City   
+<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/New%20City%20screen.png" width=200 />   
+Settings Screen   
+<img src="https://github.com/paramkansagra/WeatherApp/blob/main/screenshots/Settings%20Screen.png" width=200 />
 
 ## Getting Started
 
