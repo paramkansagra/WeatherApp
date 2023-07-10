@@ -33,6 +33,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
   String title = "guwahati";
   final String add = "\u00B0";
   bool loading = true;
+  bool firstTime = true;
 
   SizedBox paddingBetween() {
     return SizedBox(
@@ -102,7 +103,13 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
       weeklyWeather = ref.read(ApiProvider.notifier).weeklyData[0];
       kmh = ref.read(ApiProvider.notifier).windUnit;
       title = ref.read(ApiProvider.notifier).name[0];
+
+      if (firstTime && currentData.time != "00:00") {
+        loading = false;
+        firstTime = false;
+      }
     }
+
     return Scaffold(
       // defining the app bar
       appBar: AppBar(

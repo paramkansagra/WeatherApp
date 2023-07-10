@@ -11,6 +11,7 @@ void main() {
 
 Widget app() {
   return MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: ProviderScope(
       child: WeatherScreen(
         latitude: 26.18,
