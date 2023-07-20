@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/models/daily_weather.dart';
 import 'package:weather_app/models/weekly_weather.dart';
@@ -43,11 +42,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
   }
 
   @override
-  void initState() async {
-    try {
-      await FlutterDisplayMode.setHighRefreshRate();
-    } catch (Exception) {}
-
+  void initState() {
     Future.delayed(
       Duration.zero,
       () {
